@@ -33,83 +33,82 @@ public class characterControl : MonoBehaviour
     public GameObject blank;
 
     private PickUpScript pickupscript;
+
     // Start is called before the first frame update
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
-        
         environment = GetComponent<EnvironmentHitPlayer>();
         anim =anim_Object.GetComponent<Animator>();
         collider2D = GetComponent<BoxCollider2D>();
         normalform = anim_Object.GetComponent<SpriteRenderer>();
         itemList = GameObject.FindGameObjectWithTag("ItemList").GetComponent<ItemList>();
         pickupscript = gameObject.GetComponent<PickUpScript>();
-        anim.SetTrigger("isIdle");
+        AnimationSetTrigger("isIdle");
+    }
+
+    void AnimationSetTrigger(string pararmeterName)
+    {
+        anim.SetTrigger(pararmeterName);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (StateValue <= 1 && StateValue>0 && OnGround == true && gameObject.CompareTag("Player1"))
-        {
-            jump();
-        }
-        if (StateValue <-0.5 &&StateValue >= -1 && OnGround ==true && gameObject.CompareTag("Player1"))
-        {
-            slide();
-        }
-        if (usingItemValue != 0 &&  gameObject.CompareTag("Player1"))
-        {
-            useItem1();
-        }
+        Player1_Control();
+        Player2_Control();
 
-        if (StateValue <= 1 && StateValue > 0 && OnGround == true && gameObject.CompareTag("Player2"))
-        {
-            jump();
-        }
-        if (StateValue < 0 && StateValue >= -1 && OnGround == true && gameObject.CompareTag("Player2"))
-        {
-            slide();
-        }
-        if (usingItemValue != 0  && gameObject.CompareTag("Player2"))
-        {
-            useItem2();
-        }
         if (StateValue >-0.5 && StateValue <=0 && OnGround == true)
-        {
             Run();
-        }
 
-        anim.SetBool("isRun", isRun);
-        anim.SetBool("OnGround", OnGround);
+        AnimationSetBool("isRun", isRun);
+        AnimationSetBool("OnGround", OnGround);
     }
-    public void UpAndDownControl(InputAction.CallbackContext context)
+
+    public void OnCollisionEnter2D(Collision2D collision)
     {
-        StateValue = context.ReadValue<float>();
+        OnGround = true;
+        Run();
     }
-    public void UsingItemControl(InputAction.CallbackContext context)
+
+    void Run()
     {
-        usingItemValue = context.ReadValue<float>();
-    }
-     void Run() { 
         jumpCount = 0;
         isRun = true;
         collider2D.size = new Vector2(0.35f, 1.35f);
         collider2D.offset = new Vector2(-0.2f, 0f);
-       
-
     }
-    public void OnCollisionEnter2D(Collision2D collision)
+
+    void Player1_Control()
     {
-            OnGround = true;
-            Run(); 
+        if (StateValue <= 1 && StateValue > 0 && OnGround == true && gameObject.CompareTag("Player1"))
+            jump();
+        if (StateValue < -0.5 && StateValue >= -1 && OnGround == true && gameObject.CompareTag("Player1"))
+            slide();
+        if (usingItemValue != 0 && gameObject.CompareTag("Player1"))
+            useItem1();
+    }
+
+    void Player2_Control()
+    {
+        if (StateValue <= 1 && StateValue > 0 && OnGround == true && gameObject.CompareTag("Player2"))
+            jump();
+        if (StateValue < 0 && StateValue >= -1 && OnGround == true && gameObject.CompareTag("Player2"))
+            slide();
+        if (usingItemValue != 0 && gameObject.CompareTag("Player2"))
+            useItem2();
+    }
+
+    void AnimationSetBool(string parameterName,bool parameterBool)
+    {
+        anim.SetBool(parameterName, parameterBool);
     }
 
     void jump()
     {
         jumpSound.Play();
         isRun = false;
-        anim.SetTrigger("Jump");
+        AnimationSetTrigger("Jump");
         rigidbody.AddForce(new Vector2(0f, jumpForce));
         OnGround = false;
     }
@@ -119,73 +118,91 @@ public class characterControl : MonoBehaviour
         slideSound.Play();
         isRun = false;
         isSlide = true;
-        anim.SetTrigger("isSlide");
+        AnimationSetTrigger("isSlide");
         collider2D.size = new Vector2(1.35f,0.35f);
         collider2D.offset = new Vector2(-0.2f, -0.15f);
     }
+
     public void idle()
     {
         isRun = !isRun;
-        anim.SetTrigger("isIdle");
+        AnimationSetTrigger("isIdle");
     }
 
     void useItem1()
     {
         if(itemList.player1_Item[0].name == "BangFai")
-        {
-            itemList.player1_Item[0] = blank;
-            pickupscript.itemCount =false;
-            Instantiate(itemBangFai, spawnPoint_Front.transform.position, itemBangFai.transform.rotation);
-            
-        
-        }
+            Player1_BangFai();
         else if (itemList.player1_Item[0].name == "Tuktuk")
-        {
-            itemList.player1_Item[0] = blank;
-            pickupscript.itemCount =false;
-            anim.enabled = false;
-            environment.knockBackDistant = 0;
-            TranformToTukTuk();
-            Invoke("enableEnvironment", 5.0f);
-
-        }
+            Player1_Tuktuk();
         else if (itemList.player1_Item[0].name == "banana")
-        {
-            itemList.player1_Item[0] = blank;
-            pickupscript.itemCount = false;
-            Instantiate(itemBanana, spawnPoint_Back.transform.position, itemBanana.transform.rotation);
-        }
+            Player1_banana();
         else
-        {
             Debug.Log("Error");
-        }
+    }
+
+    void Player1_BangFai()
+    {
+        PLayer1_AlreadyHasItem();
+        Instantiate(itemBangFai, spawnPoint_Front.transform.position, itemBangFai.transform.rotation);
+    }
+
+    void Player1_Tuktuk()
+    {
+        PLayer1_AlreadyHasItem();
+        anim.enabled = false;
+        environment.knockBackDistant = 0;
+        TranformToTukTuk();
+        Invoke("enableEnvironment", 5.0f);
+    }
+
+    void Player1_banana()
+    {
+        PLayer1_AlreadyHasItem();
+        Instantiate(itemBanana, spawnPoint_Back.transform.position, itemBanana.transform.rotation);
+    }
+
+    void PLayer1_AlreadyHasItem()
+    {
+        itemList.player1_Item[0] = blank;
+        pickupscript.itemCount = false;
     }
 
     void useItem2()
     {
         if (itemList.player2_Item[0].name == "BangFai")
-        {
-            itemList.player2_Item[0] = blank;
-            pickupscript.itemCount = false;
-            Instantiate(itemBangFai, spawnPoint_Front.transform.position, itemBangFai.transform.rotation);
-
-        }
+            Player2_BangFai();
         else if (itemList.player2_Item[0].name == "Tuktuk")
-        {
-            itemList.player2_Item[0] = blank;
-            anim.enabled = false;
-            pickupscript.itemCount = false;
-            environment.knockBackDistant = 0;
-            TranformToTukTuk();
-            Invoke("enableEnvironment", 5.0f);
-
-        }
+            Player2_Tuktuk();
         else if (itemList.player2_Item[0].name == "banana")
-        {
-            itemList.player2_Item[0] = blank;
-            pickupscript.itemCount = false;
-            Instantiate(itemBanana, spawnPoint_Back.transform.position, itemBanana.transform.rotation);
-        }
+            Player2_banana();
+    }
+
+    void Player2_BangFai()
+    {
+        Player2_AlreadyHasItem();
+        Instantiate(itemBangFai, spawnPoint_Front.transform.position, itemBangFai.transform.rotation);
+    }
+
+    void Player2_Tuktuk()
+    {
+        Player2_AlreadyHasItem();
+        anim.enabled = false;
+        environment.knockBackDistant = 0;
+        TranformToTukTuk();
+        Invoke("enableEnvironment", 5.0f);
+    }
+
+    void Player2_banana()
+    {
+        Player2_AlreadyHasItem();
+        Instantiate(itemBanana, spawnPoint_Back.transform.position, itemBanana.transform.rotation);
+    }
+
+    void Player2_AlreadyHasItem()
+    {
+        itemList.player2_Item[0] = blank;
+        pickupscript.itemCount = false;
     }
 
     void enableEnvironment()
@@ -197,6 +214,14 @@ public class characterControl : MonoBehaviour
     {
         normalform.sprite = tuktukform;
     }
-   
-    
+
+    public void UpAndDownControl(InputAction.CallbackContext context)
+    {
+        StateValue = context.ReadValue<float>();
+    }
+
+    public void UsingItemControl(InputAction.CallbackContext context)
+    {
+        usingItemValue = context.ReadValue<float>();
+    }
 }
