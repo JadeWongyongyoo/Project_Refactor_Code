@@ -9,6 +9,7 @@ public class PatternPooling : MonoBehaviour
 
     private List<GameObject> objectInTime = new List<GameObject>();
     private bool delaySpawn;
+
     void Start()
     {
         for (int i = 0;i<poolObjectList.Count;i++)
@@ -18,10 +19,14 @@ public class PatternPooling : MonoBehaviour
         poolObject.CreateGameObjectFromPool();
     }
 
-
     void FixedUpdate()
     {
         bool isSpawned = poolObject.SpawnStatus();
+        StartSpawnWhenTrue(isSpawned);
+    }
+
+    void StartSpawnWhenTrue(bool isSpawned)
+    {
         if (isSpawned == false && delaySpawn == false)
         {
             StartCoroutine(SpawnFrequency());
@@ -29,7 +34,7 @@ public class PatternPooling : MonoBehaviour
         }
         else if (isSpawned == true)
         {
-          // StartCoroutine(Stop());
+            // StartCoroutine(Stop());
         }
     }
     
@@ -40,21 +45,16 @@ public class PatternPooling : MonoBehaviour
             RandomObjectSpawner();
             yield return new WaitForSeconds(3f);
         }
-       
     }
-    IEnumerator Stop()
-    {
-        yield return new WaitForSeconds(30f);
-        objectInTime[0].transform.position = gameObject.transform.position;
-        poolObject.DisableObjectInPool(objectInTime[0]);
-        objectInTime.RemoveAt(0);
-        RandomObjectSpawner();
-        
-       
-    }
+
     public void RandomObjectSpawner()
     {
         int randomNumber = Random.Range(0, poolObjectList.Count);
+        SpawnRandomObject(randomNumber);
+    }
+
+    void SpawnRandomObject(int randomNumber)
+    {
         if (poolObject.SpawnStatusSelection(randomNumber) == false)
         {
             objectInTime.Add(poolObject.EnableObjectInPool(randomNumber));
@@ -62,7 +62,16 @@ public class PatternPooling : MonoBehaviour
         }
         else
         {
-            RandomObjectSpawner();   
+            RandomObjectSpawner();
         }
+    }
+
+    IEnumerator Stop()
+    {
+        yield return new WaitForSeconds(30f);
+        objectInTime[0].transform.position = gameObject.transform.position;
+        poolObject.DisableObjectInPool(objectInTime[0]);
+        objectInTime.RemoveAt(0);
+        RandomObjectSpawner();
     }
 }
