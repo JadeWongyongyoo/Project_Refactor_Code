@@ -25,10 +25,6 @@ public class StoryCutscene : MonoBehaviour
         StartCoroutine(activeObject3());
         StartCoroutine(activeObject4());
     }
-    void Update()
-    {
-        
-    }
     IEnumerator activeObject1()
     {
         yield return new WaitForSeconds(time);
