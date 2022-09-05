@@ -18,22 +18,9 @@ public class RandomShowObstacle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        for(int i = 0; i < obstacleList.Count; i++)
-        {
-            if (obstacleList[i].activeInHierarchy == true)
-            {
-                break;
-            }
-            else
-            {
-                if (i == obstacleList.Count-1)
-                {
-                    Invoke("AutoSpawn", 5f);
-                }
-            }
-            
-        }
-       
+        obstacleListCount();
+
+
     }
     void AutoSpawn()
     {
@@ -45,13 +32,40 @@ public class RandomShowObstacle : MonoBehaviour
             }
             else
             {
-                if (i == obstacleList.Count - 1)
-                {
-                    randomNumber = Random.Range(0, obstacleList.Count);
-                    obstacleList[randomNumber].SetActive(true);
-                }
+                AutoSpawnObstacle(i);
             }
 
         }
     }
+    void obstacleListCount()
+    {
+        for (int i = 0; i < obstacleList.Count; i++)
+        {
+            if (obstacleList[i].activeInHierarchy == true)
+            {
+                break;
+            }
+            else
+            {
+                obstacle(i);
+            }
+
+        }
+    }
+    void obstacle(int i)
+    {
+        if (i == obstacleList.Count - 1)
+        {
+            Invoke("AutoSpawn", 5f);
+        }
+    }
+    void AutoSpawnObstacle(int i)
+    {
+        if (i == obstacleList.Count - 1)
+        {
+            randomNumber = Random.Range(0, obstacleList.Count);
+            obstacleList[randomNumber].SetActive(true);
+        }
+    }
 }
+    
