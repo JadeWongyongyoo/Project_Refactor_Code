@@ -8,6 +8,7 @@ public class ArtifactList : MonoBehaviour
     public GameObject spawnPosition;
     public WinOrLose winorlose;
     public int whichItem;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,10 +20,15 @@ public class ArtifactList : MonoBehaviour
     {
         if (winorlose.SetArtifact == true)
         {
-            whichItem = Random.Range(0,artifactList.Count);
-            Vector2 randomSpawnPos = new Vector2(spawnPosition.transform.position.x,Random.Range(spawnPosition.transform.position.y-3.5f,spawnPosition.transform.position.y-0.5f));
-            Instantiate(artifactList[whichItem],randomSpawnPos,spawnPosition.transform.rotation);
-            winorlose.SetArtifact = false;
+            createWinArtifact();
         }
+    }
+
+    void createWinArtifact()
+    {
+        whichItem = Random.Range(0, artifactList.Count);
+        Vector2 randomSpawnPos = new Vector2(spawnPosition.transform.position.x, Random.Range(spawnPosition.transform.position.y - 3.5f, spawnPosition.transform.position.y - 0.5f));
+        Instantiate(artifactList[whichItem], randomSpawnPos, spawnPosition.transform.rotation);
+        winorlose.SetArtifact = false;
     }
 }
