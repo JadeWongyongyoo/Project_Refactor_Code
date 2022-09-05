@@ -47,18 +47,18 @@ public class WinOrLose : MonoBehaviour
         stopTime();
         if (player.tag == "Player1")
         {
-            status1.GetComponent<Text>().text = "Lose";
-            status2.GetComponent<Text>().text = "Win";
-            anim1.SetTrigger("Lose");
-            anim2.SetTrigger("Win");
+            Status1Lose();
+            Status2Win();
+            Anim1Lost();
+            Anim2Win();
 
         }
         else if (player.tag == "Player2")
         {
-            status2.GetComponent<Text>().text = "Lose";
-            status1.GetComponent<Text>().text = "Win";
-            anim1.SetTrigger("Win");
-            anim2.SetTrigger("Lose");
+            Status2Lose();
+            Status1Win();
+            Anim1Win();
+            Anim2Lost();
         }
         endButton[0].SetActive(true);
         endButton[1].SetActive(true);
@@ -69,21 +69,53 @@ public class WinOrLose : MonoBehaviour
         stopTime();
         if (player.tag == "Player1")
         {
-            status1.GetComponent<Text>().text = "Win";
-            status2.GetComponent<Text>().text = "Lose";
-            anim1.SetTrigger("Win");
-            anim2.SetTrigger("Lose");
+            Status1Win();
+            Status2Lose();
+            Anim1Win();
+            Anim2Lost();
 
         }
         else if (player.tag == "Player2")
         {
-            status2.GetComponent<Text>().text = "Win";
-            status1.GetComponent<Text>().text = "Lose";
-            anim1.SetTrigger("Lose");
-            anim2.SetTrigger("Win");
+            Status2Win();
+            Status1Lose();
+            Anim1Lost();
+            Anim2Win();
         }
         endButton[0].SetActive(true);
         endButton[1].SetActive(true);
+    }
+    public void Status1Lose()
+    {
+        status1.GetComponent<Text>().text = "Lose";
+    }
+    public void Status1Win()
+    {
+        status1.GetComponent<Text>().text = "Win";
+    }
+    public void Status2Lose()
+    {
+        status2.GetComponent<Text>().text = "Lose";
+    }
+    public void Status2Win()
+    {
+        status2.GetComponent<Text>().text = "Win";
+    }
+    public void Anim1Lost()
+    {
+        anim1.SetTrigger("Lose");
+    }
+    public void Anim1Win()
+    {
+        anim1.SetTrigger("Win");
+    }
+    public void Anim2Lost()
+    {
+        anim2.SetTrigger("Lost");
+    }
+    public void Anim2Win()
+    {
+        anim2.SetTrigger("Win");
     }
     void timeCount()
     {
@@ -102,6 +134,10 @@ public class WinOrLose : MonoBehaviour
         {
             Tile[i].GetComponent<TileMove>().speed = 0;
         }
+        Environment();
+    }
+    public void Environment()
+    {
         EnvironmentHitPlayer1.CancelInvoke("iFrameAnimation");
         EnvironmentHitPlayer1.CancelInvoke("timeOutiFrame");
         EnvironmentHitPlayer2.CancelInvoke("iFrameAnimation");

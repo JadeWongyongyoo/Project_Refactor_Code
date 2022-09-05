@@ -12,26 +12,22 @@ public class EnvironmentHitPlayer : MonoBehaviour
     public GameObject WLcontroller;
     public AudioSource hitSound;
 
-    private int hp_Character=10;
+    private int hp_Character = 10;
     public Slider slider;
-    // Start is called before the first frame update
+
     void Start()
     {
-       
         characterControl = gameObject.GetComponent<characterControl>();
         sprite = objectSprite.GetComponent<SpriteRenderer>();
         moveBack = gameObject.GetComponent<ObjectMove>();
         moveBack.enabled = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
         slider.value = hp_Character;
         if (hp_Character <= 0)
-        {
             WLcontroller.GetComponent<WinOrLose>().Lose(gameObject);
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -40,42 +36,40 @@ public class EnvironmentHitPlayer : MonoBehaviour
         {
             gameObject.transform.position = new Vector2(gameObject.transform.position.x + knockBackDistant, gameObject.transform.position.y);
             if (knockBackDistant != 0)
-            {
-                hitSound.Play();
-                hp_Character -= 1;
-                iFrame();
-
-            }
+                Sounds();
+            hp_Character -= 1;
+            iFrame();
         }
-        if (collision.CompareTag("BangFai")||collision.CompareTag("Banana"))
+        if (collision.CompareTag("BangFai") || collision.CompareTag("Banana"))
         {
             if (knockBackDistant != 0)
-            {
-                hitSound.Play();
-                hp_Character -= 2;
-                Stun();
-                iFrame();
-                
-            }
-            else
-            {
-
-            }
+                Sounds();
+            hp_Character -= 2;
+            Stun();
+            iFrame();
         }
         if (characterControl.normalform.sprite == characterControl.tuktukform && collision.CompareTag("Enemy"))
         {
-            collision.gameObject.SetActive(false);
+            SettuktukObject(collision);
         }
         if (collision.CompareTag("Artifact"))
         {
-            collision.gameObject.SetActive(false);
+            SettuktukObject(collision);
             WLcontroller.GetComponent<WinOrLose>().Win(gameObject);
         }
+    }
+    public void Sounds()
+    {
+        hitSound.Play();
+    }
+    public void SettuktukObject(Collider2D collision)
+    {
+        collision.gameObject.SetActive(false);
     }
     public void iFrame()
     {
         knockBackDistant = 0;
-        InvokeRepeating("iFrameAnimation",0,0.5f);
+        InvokeRepeating("iFrameAnimation", 0, 0.5f);
         Invoke("timeOutiFrame", 3f);
     }
     public void iFrameAnimation()
@@ -98,13 +92,17 @@ public class EnvironmentHitPlayer : MonoBehaviour
     }
     void Stun()
     {
-        characterControl.idle();
+        Controls();
         moveBack.enabled = true;
         Invoke("timeOutStun", 3f);
     }
     void timeOutStun()
     {
+        Controls();
+        moveBack.enabled = false;
+    }
+    void Controls()
+    {
         characterControl.idle();
-      moveBack.enabled = false ;
     }
 }
