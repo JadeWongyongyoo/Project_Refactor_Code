@@ -36,17 +36,21 @@ public class EnvironmentHitPlayer : MonoBehaviour
         {
             gameObject.transform.position = new Vector2(gameObject.transform.position.x + knockBackDistant, gameObject.transform.position.y);
             if (knockBackDistant != 0)
+            {
                 Sounds();
-            hp_Character -= 1;
-            iFrame();
+                hp_Character -= 1;
+                iFrame();
+            }
         }
         if (collision.CompareTag("BangFai") || collision.CompareTag("Banana"))
         {
             if (knockBackDistant != 0)
+            {
                 Sounds();
-            hp_Character -= 2;
-            Stun();
-            iFrame();
+                hp_Character -= 2;
+                Stun();
+                iFrame();
+            }
         }
         if (characterControl.normalform.sprite == characterControl.tuktukform && collision.CompareTag("Enemy"))
         {
