@@ -25,12 +25,22 @@ public class WinOrLose : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Time.timeScale = 1;
-        anim1 = anim1_Object.GetComponent<Animator>();
-        anim2 = anim2_Object.GetComponent<Animator>();
+        Startanim();
+        StartEnvironment();
+    }
+
+    private void StartEnvironment()
+    {
         EnvironmentHitPlayer1 = player1.GetComponent<EnvironmentHitPlayer>();
         EnvironmentHitPlayer2 = player2.GetComponent<EnvironmentHitPlayer>();
         InvokeRepeating("timeCount", 0, 1f);
+    }
+
+    private void Startanim()
+    {
+        Time.timeScale = 1;
+        anim1 = anim1_Object.GetComponent<Animator>();
+        anim2 = anim2_Object.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -53,7 +63,7 @@ public class WinOrLose : MonoBehaviour
             Anim2Win();
 
         }
-        else if (player.tag == "Player2")
+        if (player.tag == "Player2")
         {
             Status2Lose();
             Status1Win();
@@ -75,7 +85,7 @@ public class WinOrLose : MonoBehaviour
             Anim2Lost();
 
         }
-        else if (player.tag == "Player2")
+        if (player.tag == "Player2")
         {
             Status2Win();
             Status1Lose();
@@ -138,11 +148,21 @@ public class WinOrLose : MonoBehaviour
     }
     public void Environment()
     {
+        EnvironmaentCancelInvoke();
+        EnvironmentKnockBack();
+    }
+
+    private void EnvironmentKnockBack()
+    {
+        EnvironmentHitPlayer1.knockBackDistant = 0;
+        EnvironmentHitPlayer2.knockBackDistant = 0;
+    }
+
+    private void EnvironmaentCancelInvoke()
+    {
         EnvironmentHitPlayer1.CancelInvoke("iFrameAnimation");
         EnvironmentHitPlayer1.CancelInvoke("timeOutiFrame");
         EnvironmentHitPlayer2.CancelInvoke("iFrameAnimation");
         EnvironmentHitPlayer2.CancelInvoke("timeOutiFrame");
-        EnvironmentHitPlayer1.knockBackDistant = 0;
-        EnvironmentHitPlayer2.knockBackDistant = 0;
     }
 }
