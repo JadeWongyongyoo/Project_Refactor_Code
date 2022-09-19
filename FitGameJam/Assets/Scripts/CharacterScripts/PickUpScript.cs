@@ -26,23 +26,38 @@ public class PickUpScript : MonoBehaviour
     {
         if (gameObject.CompareTag("Player1") && itemCount == false)
             Player1ItemCheck(collision);
-        else if (gameObject.CompareTag("Player2") && itemCount == false)
+        if (gameObject.CompareTag("Player2") && itemCount == false)
             Player2ItemCheck(collision);
     }
 
     void Player1ItemCheck(Collider2D collision)
     {
+        ColliderPlayer1(collision);
+        ObjectCollider(collision);
+    }
+
+    private void ColliderPlayer1(Collider2D collision)
+    {
         itemList.player1_Item[0] = collision.gameObject;
         itemCount = true;
         itemList.changeImage_Item1();
+    }
+
+    private static void ObjectCollider(Collider2D collision)
+    {
         collision.gameObject.SetActive(false);
     }
 
     void Player2ItemCheck(Collider2D collision)
     {
+        ColliderPlayer2(collision);
+        ObjectCollider(collision);
+    }
+
+    private void ColliderPlayer2(Collider2D collision)
+    {
         itemList.player2_Item[0] = collision.gameObject;
         itemCount = true;
         itemList.changeImage_Item2();
-        collision.gameObject.SetActive(false);
     }
 }
