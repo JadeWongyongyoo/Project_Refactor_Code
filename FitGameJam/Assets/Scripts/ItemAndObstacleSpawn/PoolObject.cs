@@ -16,20 +16,20 @@ public class PoolObject : MonoBehaviour
     }
     public void CreateGameObjectFromPool()
     {
-        for (int i = 0;i<MAX_OBJECT_AMOUNT;i++)
+        for (int OBJECT = 0; OBJECT < MAX_OBJECT_AMOUNT; OBJECT++)
         {
-            CreateGameObject(i, i);
-            Debug.Log("Added : " + gameObjectsPoollist[i].name + "Type : " + (i + 1));
+            CreateGameObject(OBJECT, OBJECT);
+            Debug.Log("Added : " + gameObjectsPoollist[OBJECT].name + "Type : " + (OBJECT + 1));
         }
        
     }
     public void CreateRandomlyGameObjectFromPool()
     {
-        for (int i =0; i<MAX_OBJECT_AMOUNT;i++)
+        for (int OBJECT = 0; OBJECT < MAX_OBJECT_AMOUNT; OBJECT++)
         {
             int RandomType = Random.Range(0, gameObjectTypePoollist.Count);
-            CreateGameObject(RandomType,i);
-            Debug.Log("Added : " + gameObjectsPoollist[i].name + " Type : " + (RandomType+1));
+            CreateGameObject(RandomType, OBJECT);
+            Debug.Log("Added : " + gameObjectsPoollist[OBJECT].name + " Type : " + (RandomType+1));
         }
     }
     public void CreateGameObject(int type,int number)
@@ -46,20 +46,20 @@ public class PoolObject : MonoBehaviour
     }
     public void DisableObjectInPool(GameObject DisableGameObject)
     {
-        for (int i = 0; i < MAX_OBJECT_AMOUNT; i++)
+        for (int OBJECT = 0; OBJECT < MAX_OBJECT_AMOUNT; OBJECT++)
         {
-            if (gameObjectsPoollist[i].name == DisableGameObject.name)
+            if (gameObjectsPoollist[OBJECT].name == DisableGameObject.name)
             {
-                gameObjectsPoollist[i].SetActive(false);
+                gameObjectsPoollist[OBJECT].SetActive(false);
                 break;
             }
         }
     }
     public bool SpawnStatus()
     {
-        for(int i = 0;i<MAX_OBJECT_AMOUNT; i++)
+        for(int OBJECT = 0; OBJECT < MAX_OBJECT_AMOUNT; OBJECT++)
         {
-            if (gameObjectsPoollist[i].activeInHierarchy == true)
+            if (gameObjectsPoollist[OBJECT].activeInHierarchy == true)
             {
                 
             }
@@ -77,11 +77,7 @@ public class PoolObject : MonoBehaviour
         {
             return true;
         }
-
-        else
-        {
-            return false;
-        }
-
+        return false;
+        
     }
 }

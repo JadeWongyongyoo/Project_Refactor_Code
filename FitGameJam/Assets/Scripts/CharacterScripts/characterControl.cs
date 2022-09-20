@@ -132,13 +132,21 @@ public class characterControl : MonoBehaviour
     void useItem1()
     {
         if(itemList.player1_Item[0].name == "BangFai")
+        {
             Player1_BangFai();
-        else if (itemList.player1_Item[0].name == "Tuktuk")
+            return;
+        }
+        if (itemList.player1_Item[0].name == "Tuktuk")
+        {
             Player1_Tuktuk();
-        else if (itemList.player1_Item[0].name == "banana")
+            return;
+        }
+        if (itemList.player1_Item[0].name == "banana")
+        {
             Player1_banana();
-        else
-            Debug.Log("Error");
+            return;
+        }
+        Debug.Log("Error");
     }
 
     void Player1_BangFai()
@@ -171,11 +179,20 @@ public class characterControl : MonoBehaviour
     void useItem2()
     {
         if (itemList.player2_Item[0].name == "BangFai")
+        {
             Player2_BangFai();
-        else if (itemList.player2_Item[0].name == "Tuktuk")
+            return;
+        }
+        if (itemList.player2_Item[0].name == "Tuktuk")
+        {
             Player2_Tuktuk();
-        else if (itemList.player2_Item[0].name == "banana")
+            return;
+        }
+        if (itemList.player2_Item[0].name == "banana")
+        {
             Player2_banana();
+            return;
+        }    
     }
 
     void Player2_BangFai()
