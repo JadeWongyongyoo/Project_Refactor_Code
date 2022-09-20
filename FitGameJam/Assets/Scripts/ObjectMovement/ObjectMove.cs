@@ -5,13 +5,7 @@ using UnityEngine;
 public class ObjectMove : MonoBehaviour
 {
     public float speed = 10f;
-    // Start is called before the first frame update
-    void Start()
-    {
 
-    }
-
-    // Update is called once per frame
     void Update()
     {
         gameObject.transform.position += new Vector3(-speed * Time.deltaTime, 0, 0);

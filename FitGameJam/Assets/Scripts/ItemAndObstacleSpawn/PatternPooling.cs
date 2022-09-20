@@ -12,9 +12,9 @@ public class PatternPooling : MonoBehaviour
 
     void Start()
     {
-        for (int i = 0;i<poolObjectList.Count;i++)
+        for (int numberelements = 0; numberelements < poolObjectList.Count; numberelements++)
         {
-            poolObject.AddGameObjectTypeToPool(poolObjectList[i]);
+            poolObject.AddGameObjectTypeToPool(poolObjectList[numberelements]);
         }
         poolObject.CreateGameObjectFromPool();
     }
@@ -29,7 +29,7 @@ public class PatternPooling : MonoBehaviour
     {
         if (isSpawned == false && delaySpawn == false)
         {
-            StartCoroutine(SpawnFrequency());
+            StartCoroutine(ObjectSpawnFrequency());
             delaySpawn = true;
         }
         else if (isSpawned == true)
@@ -38,9 +38,9 @@ public class PatternPooling : MonoBehaviour
         }
     }
     
-    IEnumerator SpawnFrequency()
+    IEnumerator ObjectSpawnFrequency()
     {
-        for (int i = 0;i<10;i++)
+        for (int Numberfrequenciesobjects = 0; Numberfrequenciesobjects < 10; Numberfrequenciesobjects++)
         {
             RandomObjectSpawner();
             yield return new WaitForSeconds(3f);

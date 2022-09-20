@@ -7,61 +7,59 @@ public class RandomShowObstacle : MonoBehaviour
     public List<GameObject> obstacleList = new List<GameObject>();
     private int randomNumber;
 
-
-    // Start is called before the first frame update
     void Start()
     {
         randomNumber = Random.Range(0, obstacleList.Count);
         obstacleList[randomNumber].SetActive(true);
     }
 
-    // Update is called once per frame
     void Update()
     {
         obstacleListCount();
 
-
     }
+
     void AutoSpawn()
     {
-        for (int i = 0; i < obstacleList.Count; i++)
+        for (int numberobstacle = 0; numberobstacle < obstacleList.Count; numberobstacle++)
         {
-            if (obstacleList[i].activeInHierarchy == true)
+            if (obstacleList[numberobstacle].activeInHierarchy == true)
             {
                 break;
             }
             else
             {
-                AutoSpawnObstacle(i);
+                AutoSpawnObstacle(numberobstacle);
             }
 
         }
     }
+
     void obstacleListCount()
     {
-        for (int i = 0; i < obstacleList.Count; i++)
+        for (int Obstaclechecknumber = 0; Obstaclechecknumber < obstacleList.Count; Obstaclechecknumber++)
         {
-            if (obstacleList[i].activeInHierarchy == true)
+            if (obstacleList[Obstaclechecknumber].activeInHierarchy == true)
             {
                 break;
             }
             else
             {
-                obstacle(i);
+                obstacle(Obstaclechecknumber);
             }
 
         }
     }
-    void obstacle(int i)
+    void obstacle(int Obstaclechecknumber)
     {
-        if (i == obstacleList.Count - 1)
+        if (Obstaclechecknumber == obstacleList.Count - 1)
         {
             Invoke("AutoSpawn", 5f);
         }
     }
-    void AutoSpawnObstacle(int i)
+    void AutoSpawnObstacle(int numberobstacle)
     {
-        if (i == obstacleList.Count - 1)
+        if (numberobstacle == obstacleList.Count - 1)
         {
             randomNumber = Random.Range(0, obstacleList.Count);
             obstacleList[randomNumber].SetActive(true);
