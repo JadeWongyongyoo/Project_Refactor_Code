@@ -12,9 +12,14 @@ public class BulletScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Player1" || collision.tag == "Player2" || collision.tag == "Wall")
+        if (isShouldDestroyBullet(collision))
         Invoke("destroyBullet", 0.2f);
         
+    }
+
+    private bool isShouldDestroyBullet(Collider2D collision)
+    {
+        return collision.tag == "Player1" || collision.tag == "Player2" || collision.tag == "Wall";
     }
 
     private void destroyBullet()
