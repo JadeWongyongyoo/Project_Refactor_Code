@@ -17,10 +17,9 @@ public class ArtifactList : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (winorlose.SetArtifact == true)
-        {
-            spawnWinArtifact.createWinArtifact();
-        }
+        if (winorlose.SetArtifact == false)
+            return;
+            spawnWinArtifact.createWinArtifact();      
     }
 
 }

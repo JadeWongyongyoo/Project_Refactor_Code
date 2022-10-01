@@ -15,6 +15,7 @@ TagManager:
   - BG
   - PoolList
   - tile
+  - Wall
   layers:
   - Default
   - TransparentFX

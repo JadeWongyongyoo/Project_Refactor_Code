@@ -81,22 +81,52 @@ public class characterControl : MonoBehaviour
 
     void Player1_Control()
     {
-        if (StateValue <= 1 && StateValue > 0 && OnGround == true && gameObject.CompareTag("Player1"))
+        if (ShouldJump1())
             jump();
-        if (StateValue < -0.5 && StateValue >= -1 && OnGround == true && gameObject.CompareTag("Player1"))
+        if (ShouldSlide1())
             slide();
-        if (usingItemValue != 0 && gameObject.CompareTag("Player1"))
+        if (ShouldUseItem1())
             useItem1();
+    }
+
+    public bool ShouldJump1()
+    {
+        return StateValue <= 1 && StateValue > 0 && OnGround == true && gameObject.CompareTag("Player1");
+    }
+
+    public bool ShouldSlide1()
+    {
+        return StateValue < 0 && StateValue >= -1 && OnGround == true && gameObject.CompareTag("Player1");
+    }
+
+    public bool ShouldUseItem1()
+    {
+        return usingItemValue != 0 && gameObject.CompareTag("Player1");
     }
 
     void Player2_Control()
     {
-        if (StateValue <= 1 && StateValue > 0 && OnGround == true && gameObject.CompareTag("Player2"))
+        if (ShouldJump2())
             jump();
-        if (StateValue < 0 && StateValue >= -1 && OnGround == true && gameObject.CompareTag("Player2"))
+        if (ShouldSlide2())
             slide();
-        if (usingItemValue != 0 && gameObject.CompareTag("Player2"))
+        if (ShouldUseItem2())
             useItem2();
+    }
+
+    public bool ShouldJump2()
+    {
+        return StateValue <= 1 && StateValue > 0 && OnGround == true && gameObject.CompareTag("Player2");
+    }
+
+    public bool ShouldSlide2()
+    {
+        return StateValue < 0 && StateValue >= -1 && OnGround == true && gameObject.CompareTag("Player2");
+    }
+
+    public bool ShouldUseItem2()
+    {
+        return usingItemValue != 0 && gameObject.CompareTag("Player2");
     }
 
     void AnimationSetBool(string parameterName,bool parameterBool)

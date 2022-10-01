@@ -35,7 +35,7 @@ public class EnvironmentHitPlayer : MonoBehaviour
         if (collision.CompareTag("Enemy"))
         {
             gameObject.transform.position = new Vector2(gameObject.transform.position.x + knockBackDistant, gameObject.transform.position.y);
-            if (knockBackDistant != 0)
+            if (ShouldKnockBack())
             {
                 Sounds();
                 hp_Character -= 1;
@@ -44,7 +44,7 @@ public class EnvironmentHitPlayer : MonoBehaviour
         }
         if (collision.CompareTag("BangFai") || collision.CompareTag("Banana"))
         {
-            if (knockBackDistant != 0)
+            if (ShouldKnockBack())
             {
                 Sounds();
                 hp_Character -= 2;
@@ -61,6 +61,10 @@ public class EnvironmentHitPlayer : MonoBehaviour
             SettuktukObject(collision);
             WLcontroller.GetComponent<WinOrLose>().Win(gameObject);
         }
+    }
+    public bool ShouldKnockBack()
+    {
+        return knockBackDistant != 0;
     }
     public void Sounds()
     {
