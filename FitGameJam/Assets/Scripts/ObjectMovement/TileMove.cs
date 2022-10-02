@@ -10,7 +10,13 @@ public class TileMove : MonoBehaviour
     void Update()
     {
         gameObject.transform.position += new Vector3(-speed * Time.deltaTime, 0, 0);
-        if (gameObject.transform.position.x<-50)        
+        if (PositionTileMove())        
+        {
             gameObject.transform.position = Origin.transform.position;
+        }
+    }
+    public bool PositionTileMove()
+    {
+        return gameObject.transform.position.x<-50;
     }
 }
