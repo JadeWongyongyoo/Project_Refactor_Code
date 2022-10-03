@@ -11,8 +11,13 @@ public class BGmove : MonoBehaviour
     void Update()
     {
         gameObject.transform.position += new Vector3(-speed * Time.deltaTime, 0, 0);
-        
-        if (gameObject.transform.position.x<-64)
-           gameObject.transform.position = Origin.transform.position;
+        if (PositionBackground())
+           {
+            gameObject.transform.position = Origin.transform.position;           
+           }           
     }
+    public bool PositionBackground()
+           {
+            return gameObject.transform.position.x<-64;            
+           }
 }
