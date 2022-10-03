@@ -19,6 +19,11 @@ public class BossLifePoint : MonoBehaviour
     void Update()
     {
         BossLifeText.text = "Boss Life: " + LifeCounter;
+        if(LifeCounter == 0)
+        {
+            onTriggerReciever.onTriggerEnter -= ReduceBossLife;
+            Destroy(gameObject);
+        }
     }
 
     void ReduceBossLife()
