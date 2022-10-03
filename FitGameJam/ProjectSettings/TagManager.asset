@@ -16,6 +16,7 @@ TagManager:
   - PoolList
   - tile
   - Wall
+  - Boss
   layers:
   - Default
   - TransparentFX

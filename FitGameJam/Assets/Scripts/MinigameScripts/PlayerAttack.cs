@@ -5,10 +5,20 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     public GameObject attackSword, spawnPoint;
-
-    public void spawnSword()
+    [SerializeField] OnButtonclick onButtonEnter;
+    private void Start()
+    {
+        onButtonEnter.onButtonclick += spawnSword;
+    }
+    void spawnSword()
     {
         Instantiate(attackSword, spawnPoint.transform.position, attackSword.transform.rotation);
     }
-
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Boss"))
+        {
+            onButtonEnter.onButtonclick -= spawnSword;
+        }
+    }
 }

@@ -141,7 +141,7 @@ GameObject:
   - component: {fileID: 74188274}
   m_Layer: 0
   m_Name: TitanDancer
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1295,6 +1295,7 @@ GameObject:
   - component: {fileID: 847367697}
   - component: {fileID: 847367696}
   - component: {fileID: 847367695}
+  - component: {fileID: 847367700}
   - component: {fileID: 847367699}
   m_Layer: 5
   m_Name: Canvas
@@ -1405,6 +1406,18 @@ MonoBehaviour:
   RetryButton: {fileID: 621715207}
   MainmenuButton: {fileID: 1373745328}
   Boss: {fileID: 74188266}
+--- !u!114 &847367700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 847367694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4637db339744f2f45ac05760c305d53f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1123809554
 GameObject:
   m_ObjectHideFlags: 0
@@ -1500,6 +1513,7 @@ GameObject:
   - component: {fileID: 1143212338}
   - component: {fileID: 1143212337}
   - component: {fileID: 1143212339}
+  - component: {fileID: 1143212342}
   - component: {fileID: 1143212340}
   - component: {fileID: 1143212341}
   m_Layer: 0
@@ -1591,6 +1605,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackSword: {fileID: 2211249824735918282, guid: f339176370183ab4b85b3c48a244d2ff, type: 3}
   spawnPoint: {fileID: 1511974427}
+  onButtonEnter: {fileID: 847367700}
 --- !u!61 &1143212340
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1638,6 +1653,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
+--- !u!114 &1143212342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1143212336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d33be4c440ff8604295b615025897887, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RetryButton: {fileID: 621715207}
+  MainMenuButton: {fileID: 1373745328}
 --- !u!1 &1218956471
 GameObject:
   m_ObjectHideFlags: 0
@@ -2147,9 +2176,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1143212339}
-        m_TargetAssemblyTypeName: PlayerAttack, Assembly-CSharp
-        m_MethodName: spawnSword
+      - m_Target: {fileID: 847367700}
+        m_TargetAssemblyTypeName: OnButtonclick, Assembly-CSharp
+        m_MethodName: NotifyonButtonclick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
