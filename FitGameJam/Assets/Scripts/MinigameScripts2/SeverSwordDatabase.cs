@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Defective.JSON;
 using UnityEngine.Networking;
+using UnityEngine;
 using System;
 
 public class SeverSwordDatabase : SwordDatabase
@@ -15,10 +16,10 @@ public class SeverSwordDatabase : SwordDatabase
 
     IEnumerator DownloadswordDatabase()
     {
-        var webRequest = UnityWebQuest.Get(url);
+        var webRequest = UnityWebRequest.Get(url);
         yield return webRequest.SendWebRequest();
 
-        var downloadedText = webRequest.downloadedHandler.text;
+        var downloadedText = webRequest.downloadHandler.text;
         var jsonObject = new JSONObject(downloadedText);
         foreach (var json in jsonObject.list)
         {
