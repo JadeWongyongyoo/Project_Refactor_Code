@@ -1160,10 +1160,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1362846777}
   - component: {fileID: 1362846776}
-  - component: {fileID: 1362846775}
-  - component: {fileID: 1362846774}
   - component: {fileID: 1362846773}
   - component: {fileID: 1362846772}
+  - component: {fileID: 1362846778}
   m_Layer: 0
   m_Name: Player
   m_TagString: Boss
@@ -1218,35 +1217,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.63394165, y: 2}
   m_EdgeRadius: 0
---- !u!114 &1362846774
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1362846771}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d33be4c440ff8604295b615025897887, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RetryButton: {fileID: 0}
-  MainMenuButton: {fileID: 0}
---- !u!114 &1362846775
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1362846771}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3aa70eddbc0b73d4c8185225ecdbd8bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackSword: {fileID: 2211249824735918282, guid: f339176370183ab4b85b3c48a244d2ff, type: 3}
-  spawnPoint: {fileID: 521826933}
-  onButtonEnter: {fileID: 0}
 --- !u!212 &1362846776
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1315,6 +1285,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1362846778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1362846771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73c238b074cdfd94dacd5a8e8cf5b0a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  swordDataList: []
+  jsonFile: {fileID: 4900000, guid: 5914563488fe6174192bd3e6e800a9c3, type: 3}
 --- !u!1 &1993102384
 GameObject:
   m_ObjectHideFlags: 0
