@@ -40,6 +40,16 @@ public class SceneManagementScript : MonoBehaviour
         SceneManager.LoadScene(6);
     }
 
+    public void MinigameScene1()
+    {
+        SceneManager.LoadScene(7);
+    }
+
+    public void MinigameScene2()
+    {
+        SceneManager.LoadScene(8);
+    }
+
     public void ExitGame()
     {
         Application.Quit();

@@ -29,7 +29,7 @@ public class SeverSwordDatabase : SwordDatabase
             var damage = 0;
             json.GetField(ref damage, "damage");
 
-            var newSwordData = new SwordData();
+            var newSwordData = gameObject.AddComponent<SwordData>();
             newSwordData.swordname = swordname;
             newSwordData.damage = damage;
 
