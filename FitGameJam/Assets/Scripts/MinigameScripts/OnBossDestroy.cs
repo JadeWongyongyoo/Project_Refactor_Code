@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using System;
 
 public class OnBossDestroy : MonoBehaviour
 {
@@ -16,10 +18,11 @@ public class OnBossDestroy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Boss == null)
+        if (Boss == null)
         {
             RetryButton.SetActive(true);
             MainmenuButton.SetActive(true);
         }
     }
+
 }
